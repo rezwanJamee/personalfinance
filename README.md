@@ -10,10 +10,10 @@ Following are some sample frontend user interfaces for the application.
 <p align="center"> Screenshot: Dashboard page</p>
 
 ![](screenshot/Accountdata.png)
-<p align="center"> Screenshot: Dashboard page</p>
+<p align="center"> Screenshot: Data tables page</p>
 
 ![](screenshot/DataForms.png)
-<p align="center"> Screenshot: DataForms page</p>
+<p align="center"> Screenshot: Add data forms page</p>
 
 <br/>
 
