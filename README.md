@@ -1,4 +1,4 @@
-# Personal Finance
+# Personal Finance (Backend)
 A fullstack application for tracking users accounts, earning and expenses in one app. 
 
 <br/>
@@ -19,3 +19,6 @@ Following are some sample frontend user interfaces for the application.
 
 ### Tools used in the project:
 Backend: Java 16, Springboot, Spring Data JPA and MySQL Database.
+
+Frontend part is available at 
+[Github Repo](https://github.com/rezwanJamee/personalfinance_frontend).
