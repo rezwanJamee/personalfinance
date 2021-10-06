@@ -4,6 +4,7 @@ import com.rifatsproject.Personalfinance.domain.Account;
 import com.rifatsproject.Personalfinance.exception.UserInputException;
 import com.rifatsproject.Personalfinance.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Account createAccount(@RequestBody Account account)
             throws UserInputException {
         if(account.getAccountName() != null &&

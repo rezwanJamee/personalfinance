@@ -1,6 +1,7 @@
 package com.rifatsproject.Personalfinance.service;
 
 import com.google.gson.JsonObject;
+import com.rifatsproject.Personalfinance.domain.Account;
 import com.rifatsproject.Personalfinance.domain.Income;
 import com.rifatsproject.Personalfinance.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class IncomeService {
 
     @Autowired
     private IncomeRepository incomeRepository;
+    @Autowired
+    private AccountService accountService;
 
     public List<Income> getAllIncome(){
         return incomeRepository.findAll();
@@ -24,8 +27,18 @@ public class IncomeService {
     }
 
     public String createIncome(Income income){
-        incomeRepository.save(income);
-        return "Created successfully!";
+
+        String name = income.getBankname();
+        Account a = accountService.getAccountByName(name);
+        if(a != null){
+            float currentbalance = a.getBalance() + income.getAmount();
+            a.setBalance(currentbalance);
+            accountService.updateAccount(a);
+            incomeRepository.save(income);
+            return "Created successfully!";
+        }else {
+            return "Operation unsuccessfully!";
+        }
     }
 
     public String updateIncome(Income income){

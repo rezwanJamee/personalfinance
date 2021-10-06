@@ -3,7 +3,6 @@ package com.rifatsproject.Personalfinance.service;
 import com.rifatsproject.Personalfinance.domain.Account;
 import com.rifatsproject.Personalfinance.exception.UserInputException;
 import com.rifatsproject.Personalfinance.repository.AccountRepository;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,7 @@ public class AccountService {
         }
     }
 
+    //Delete account
     public String closeAccount(Long id) throws UserInputException {
         try{
         String message = "Your account " + findAccountById(id).getAccountName()
@@ -46,5 +46,10 @@ public class AccountService {
         }catch (Exception e){
             throw new UserInputException("Invalid user input");
         }
+    }
+
+    //Get account by name
+    public Account getAccountByName(String name){
+        return accountRepository.getAccountDetails(name);
     }
 }

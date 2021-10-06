@@ -3,6 +3,7 @@ package com.rifatsproject.Personalfinance.controller;
 import com.rifatsproject.Personalfinance.domain.Income;
 import com.rifatsproject.Personalfinance.service.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class IncomeController {
     private IncomeService incomeService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public String addIncome(@RequestBody Income income){
         return incomeService.createIncome(income);
     }
