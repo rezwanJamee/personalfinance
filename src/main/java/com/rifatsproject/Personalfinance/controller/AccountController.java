@@ -1,6 +1,7 @@
 package com.rifatsproject.Personalfinance.controller;
 
 import com.rifatsproject.Personalfinance.domain.Account;
+import com.rifatsproject.Personalfinance.exception.UserInputException;
 import com.rifatsproject.Personalfinance.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,14 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
-    public Account createAccount(@RequestBody Account account){
-        return accountService.createAccount(account);
+    public Account createAccount(@RequestBody Account account)
+            throws UserInputException {
+        if(account.getAccountName() != null &&
+                account.getBalance() >= 0) {
+            return accountService.createAccount(account);
+        }else {
+            throw new UserInputException("Invaild user input");
+        }
     }
 
     @GetMapping
@@ -32,8 +39,15 @@ public class AccountController {
 
     //update account balance
     @PutMapping
-    public String updateAccount(@RequestBody Account account){
+    public String updateAccount(@RequestBody Account account)
+            throws UserInputException{
+        if(account.getAccountName() != null &&
+                account.getBalance() >= 0 &&
+                account.getBankname() != null){
         return accountService.updateAccount(account);
+        }else {
+            throw new UserInputException("Invaild user input");
+        }
     }
     //Transfer money update multiple account balance
 
@@ -42,5 +56,4 @@ public class AccountController {
     public String deleteAccount(@PathVariable Long id){
         return accountService.closeAccount(id);
     }
-
 }

@@ -1,6 +1,7 @@
 package com.rifatsproject.Personalfinance.service;
 
 import com.rifatsproject.Personalfinance.domain.Account;
+import com.rifatsproject.Personalfinance.exception.UserInputException;
 import com.rifatsproject.Personalfinance.repository.AccountRepository;
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,14 @@ public class AccountService {
         }
     }
 
-    public String closeAccount(Long id){
+    public String closeAccount(Long id) throws UserInputException {
+        try{
         String message = "Your account " + findAccountById(id).getAccountName()
                 +" with balance " + findAccountById(id).getBalance() +" is closed!";
         accountRepository.deleteById(id);
         return message;
+        }catch (Exception e){
+            throw new UserInputException("Invalid user input");
+        }
     }
 }
